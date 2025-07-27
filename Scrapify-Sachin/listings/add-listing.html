@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Listing - EcoTrade</title>
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- Firebase SDK -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+      import { getFirestore, collection, doc, setDoc, addDoc, getDocs, getDoc, query, where } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+      import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-storage.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBmXZHkXeJU6t-0JkEeGsPzJ5jigvQQTrI",
+        authDomain: "scrapify-8c5a2.firebaseapp.com",
+        projectId: "scrapify-8c5a2",
+        storageBucket: "scrapify-8c5a2.appspot.com",
+        messagingSenderId: "828806707255",
+        appId: "1:828806707255:web:c115f694979f8b86c4a7b2"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const storage = getStorage(app);
+      
+      // Make Firebase services available globally
+      window.db = db;
+      window.storage = storage;
+      window.storageRef = ref;
+      window.uploadBytes = uploadBytes;
+      window.getDownloadURL = getDownloadURL;
+      
+      // Firestore functions
+      window.firestoreCollection = collection;
+      window.firestoreDoc = doc;
+      window.firestoreSetDoc = setDoc;
+      window.firestoreAddDoc = addDoc;
+      window.firestoreGetDocs = getDocs;
+      window.firestoreGetDoc = getDoc;
+      window.firestoreQuery = query;
+      window.firestoreWhere = where;
+      
+      console.log("Firebase SDK initialized");
+    </script>
+    <style>
+        /* Image preview style enhancements */
+        .image-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .preview-item {
+            position: relative;
+            height: 120px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            border: 1px solid #ddd;
+        }
+        
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .preview-remove {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: rgba(255, 255, 255, 0.9);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #e74c3c;
+            transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .preview-remove:hover {
+            background-color: #e74c3c;
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        /* Make file input more appealing */
+        #direct-image-upload {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        #direct-image-upload:hover {
+            background-color: #f0f7ff;
+            border-color: #2196F3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><a href="../index.html">EcoTrade</a></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
+                    <li><a href="../plans.html">Premium Plans</a></li>
+                    <li><a href="../login.html" class="btn-login">Login/Register</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="form-section">
+        <div class="container">
+            <h2>Add New Scrap Listing</h2>
+            <form id="add-listing-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="listing-title">Title</label>
+                        <input type="text" id="listing-title" placeholder="e.g. Aluminum Scrap - Industrial Grade" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="listing-category">Category</label>
+                        <select id="listing-category" required>
+                            <option value="">Select a category</option>
+                            <option value="Metal">Metal</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Plastic">Plastic</option>
+                            <option value="Paper">Paper</option>
+                            <option value="Glass">Glass</option>
+                            <option value="Rubber">Rubber</option>
+                            <option value="Textile">Textile</option>
+                            <option value="Wood">Wood</option>
+                            <option value="Construction">Construction</option>
+                            <option value="Automotive">Automotive</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="listing-description">Description</label>
+                    <textarea id="listing-description" rows="5" placeholder="Describe your scrap material in detail (condition, origin, composition, etc.)" required></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="listing-price">Starting Price (₹)</label>
+                        <div class="input-group">
+                            <input type="number" id="listing-price" min="0" step="0.01" placeholder="Enter amount in Rupees" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="listing-quantity">Quantity (kg)</label>
+                        <input type="number" id="listing-quantity" min="1" placeholder="Enter quantity in kilograms" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="seller-phone">Contact Phone Number</label>
+                        <input type="tel" id="seller-phone" placeholder="Your phone number for buyer contact" required>
+                        <p class="help-text" style="color: #777; margin-top: 5px; font-size: 12px;">This will be shown to premium buyers only.</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="seller-email">Contact Email (Optional)</label>
+                        <input type="email" id="seller-email" placeholder="Your email for buyer contact">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="seller-address">Pickup Address</label>
+                    <textarea id="seller-address" rows="2" placeholder="Address where buyers can pickup the scrap material" required></textarea>
+                    <p class="help-text" style="color: #777; margin-top: 5px; font-size: 12px;">This will be shown to premium buyers only.</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="listing-location">Location</label>
+                    <select id="listing-location" required>
+                        <option value="">Select a state/UT</option>
+                        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                        <option value="Assam">Assam</option>
+                        <option value="Bihar">Bihar</option>
+                        <option value="Chandigarh">Chandigarh</option>
+                        <option value="Chhattisgarh">Chhattisgarh</option>
+                        <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Goa">Goa</option>
+                        <option value="Gujarat">Gujarat</option>
+                        <option value="Haryana">Haryana</option>
+                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                        <option value="Jharkhand">Jharkhand</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Ladakh">Ladakh</option>
+                        <option value="Lakshadweep">Lakshadweep</option>
+                        <option value="Madhya Pradesh">Madhya Pradesh</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Manipur">Manipur</option>
+                        <option value="Meghalaya">Meghalaya</option>
+                        <option value="Mizoram">Mizoram</option>
+                        <option value="Nagaland">Nagaland</option>
+                        <option value="Odisha">Odisha</option>
+                        <option value="Puducherry">Puducherry</option>
+                        <option value="Punjab">Punjab</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                        <option value="Sikkim">Sikkim</option>
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Telangana">Telangana</option>
+                        <option value="Tripura">Tripura</option>
+                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                        <option value="Uttarakhand">Uttarakhand</option>
+                        <option value="West Bengal">West Bengal</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Photos</label>
+                    <div style="margin-bottom: 20px;">
+                        <label for="direct-image-upload">Upload scrap material images (Max 5 images):</label>
+                        <input type="file" id="direct-image-upload" multiple accept="image/*" style="display: block; margin-top: 10px; padding: 10px; border: 2px dashed #1565c0; border-radius: 5px; width: 100%;">
+                        <p class="help-text" style="color: #777; margin-top: 5px;">(Max 5 images, each up to 5MB)</p>
+                    </div>
+                    <div class="image-preview" id="image-preview"></div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Create Listing</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 EcoTrade. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/listings.js"></script>
+    <script>
+        // Initialize page when DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, initializing page setup');
+            try {
+                // Set up the global selectedImages array
+                window.selectedImages = [];
+                
+                // Function to process images
+                function processUploadedImages(files) {
+                    console.log('Processing images, count:', files ? files.length : 0);
+                    if (!files || files.length === 0) return;
+                    
+                    const imagePreview = document.getElementById('image-preview');
+                    imagePreview.innerHTML = '';
+                    window.selectedImages = [];
+                    
+                    // Limit to 5 images
+                    const maxImages = Math.min(files.length, 5);
+                    console.log(`Processing ${maxImages} images`);
+                    
+                    for (let i = 0; i < maxImages; i++) {
+                        const file = files[i];
+                        console.log(`Processing file ${i+1}/${maxImages}: ${file.name}, size: ${file.size} bytes, type: ${file.type}`);
+                        
+                        try {
+                            // Create a FileReader for preview
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                const imageUrl = e.target.result;
+                                console.log('Image loaded via FileReader, data URL length:', imageUrl.length);
+                                window.selectedImages.push(imageUrl);
+                                
+                                // Create preview element
+                                const previewItem = document.createElement('div');
+                                previewItem.className = 'preview-item';
+                                previewItem.innerHTML = `
+                                    <img src="${imageUrl}" alt="Preview">
+                                    <span class="preview-remove" data-index="${window.selectedImages.length - 1}">×</span>
+                                `;
+                                imagePreview.appendChild(previewItem);
+                                console.log('Preview element added, total images:', window.selectedImages.length);
+                                
+                                // Add remove functionality
+                                previewItem.querySelector('.preview-remove').onclick = function(e) {
+                                    const index = parseInt(this.getAttribute('data-index'));
+                                    window.selectedImages.splice(index, 1);
+                                    previewItem.remove();
+                                    console.log('Image removed from preview, remaining:', window.selectedImages.length);
+                                    
+                                    // Update indices for remaining elements
+                                    const removeButtons = imagePreview.querySelectorAll('.preview-remove');
+                                    removeButtons.forEach((btn, idx) => {
+                                        btn.setAttribute('data-index', idx);
+                                    });
+                                };
+                            };
+                            
+                            reader.onerror = function(error) {
+                                console.error('Error reading file:', error);
+                                alert('Error reading file: ' + file.name);
+                            };
+                            
+                            // Read the image file
+                            reader.readAsDataURL(file);
+                            console.log('Started reading file:', file.name);
+                        } catch (error) {
+                            console.error('Error processing image:', error);
+                            alert('Error processing image: ' + file.name);
+                        }
+                    }
+                }
+                
+                // Direct image upload event handler
+                const directImageInput = document.getElementById('direct-image-upload');
+                if (directImageInput) {
+                    console.log('Direct image upload input found');
+                    directImageInput.onchange = function(e) {
+                        console.log('Direct image upload change event triggered');
+                        processUploadedImages(e.target.files);
+                    };
+                } else {
+                    console.error('Direct image upload input not found in DOM');
+                }
+            } catch (error) {
+                console.error('Error during page initialization:', error);
+            }
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buyer Dashboard - EcoTrade</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><a href="../index.html">EcoTrade</a></h1>
+            </div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
+                    <li><a href="../plans.html">Premium Plans</a></li>
+                    <li><a href="#" id="logout-btn" class="btn-login">Logout</a></li>
+                </ul>
+            </nav>
+            <div class="overlay"></div>
+        </div>
+    </header>
+
+    <section>
+        <div class="container">
+            <div class="dashboard-container">
+                <div class="sidebar">
+                    <div class="sidebar-user">
+                        <img src="../img/default-buyer.jpg" alt="Profile" id="sidebar-user-img">
+                        <h3 id="sidebar-user-name">Loading...</h3>
+                        <p>Buyer</p>
+                    </div>
+                    <div class="sidebar-menu">
+                        <a href="#" class="active" data-tab="dashboard">Dashboard</a>
+                        <a href="#" data-tab="bids">My Bids</a>
+                        <a href="#" data-tab="saved">Saved Listings</a>
+                        <a href="#" data-tab="profile">Profile</a>
+                        <a href="../index.html" class="btn-action">Browse Listings</a>
+                    </div>
+                </div>
+                
+                <div class="main-content">
+                    <!-- Dashboard Tab -->
+                    <div class="dashboard-tab active" id="dashboard-tab">
+                        <div class="dashboard-header">
+                            <h2>Dashboard Overview</h2>
+                            <div class="date-filter">
+                                <select id="date-range">
+                                    <option value="week">This Week</option>
+                                    <option value="month" selected>This Month</option>
+                                    <option value="year">This Year</option>
+                                    <option value="all">All Time</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <h3 id="total-bids">0</h3>
+                                <p>Total Bids</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3 id="pending-bids">0</h3>
+                                <p>Pending Bids</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3 id="accepted-bids">0</h3>
+                                <p>Accepted Bids</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3 id="rejected-bids">0</h3>
+                                <p>Rejected Bids</p>
+                            </div>
+                        </div>
+                        
+                        <h3>Recent Activity</h3>
+                        <div class="recent-activity" id="recent-activity">
+                            <p class="loading">Loading activity...</p>
+                        </div>
+                    </div>
+                    
+                    <!-- My Bids Tab -->
+                    <div class="dashboard-tab" id="bids-tab">
+                        <div class="dashboard-header">
+                            <h2>My Bids</h2>
+                            <div class="filter">
+                                <select id="bid-status-filter">
+                                    <option value="all">All Bids</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="accepted">Accepted</option>
+                                    <option value="rejected">Rejected</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="bids-list" id="my-bids">
+                            <p class="loading">Loading bids...</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Saved Listings Tab -->
+                    <div class="dashboard-tab" id="saved-tab">
+                        <div class="dashboard-header">
+                            <h2>Saved Listings</h2>
+                        </div>
+                        
+                        <div class="listings-grid" id="saved-listings">
+                            <p class="loading">Loading saved listings...</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Profile Tab -->
+                    <div class="dashboard-tab" id="profile-tab">
+                        <div class="dashboard-header">
+                            <h2>My Profile</h2>
+                            <button class="btn btn-primary" id="save-profile">Save Changes</button>
+                        </div>
+                        
+                        <form id="profile-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="profile-name">Full Name</label>
+                                    <input type="text" id="profile-name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="profile-email">Email</label>
+                                    <input type="email" id="profile-email" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="profile-phone">Phone Number</label>
+                                    <input type="tel" id="profile-phone">
+                                </div>
+                                <div class="form-group">
+                                    <label for="profile-location">Location</label>
+                                    <input type="text" id="profile-location">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="profile-bio">Bio</label>
+                                <textarea id="profile-bio" rows="4"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Profile Image</label>
+                                <div class="profile-image-upload">
+                                    <img src="../img/default-buyer.jpg" id="profile-image-preview" alt="Profile Image">
+                                    <button type="button" class="btn btn-secondary" id="change-image-btn">Change Image</button>
+                                    <input type="file" id="profile-image" style="display: none;" accept="image/*">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 EcoTrade. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/dashboard.js"></script>
+</body>
+</html> 

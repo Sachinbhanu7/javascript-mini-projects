@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listing Details - EcoTrade</title>
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <style>
+        .premium-blur {
+            position: relative;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .premium-content-blur {
+            filter: blur(5px);
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-select: none;
+            opacity: 0.7;
+        }
+        
+        .premium-upgrade-prompt {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255,255,255,0.9);
+            border-radius: 8px;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .lock-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .premium-upgrade-prompt h4 {
+            margin: 10px 0;
+            color: #333;
+        }
+        
+        .premium-upgrade-prompt p {
+            margin-bottom: 15px;
+            color: #666;
+        }
+        
+        /* Hide premium prompt for premium users */
+        body.is-premium .premium-content-blur {
+            filter: none;
+            opacity: 1;
+            pointer-events: auto;
+            user-select: auto;
+            -webkit-user-select: auto;
+        }
+        
+        body.is-premium .premium-upgrade-prompt {
+            display: none;
+        }
+    </style>
+    
+    <!-- Firebase SDK -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+      import { getFirestore, collection, doc, setDoc, addDoc, getDocs, getDoc, query, where } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+      import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-storage.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBmXZHkXeJU6t-0JkEeGsPzJ5jigvQQTrI",
+        authDomain: "scrapify-8c5a2.firebaseapp.com",
+        projectId: "scrapify-8c5a2",
+        storageBucket: "scrapify-8c5a2.appspot.com",
+        messagingSenderId: "828806707255",
+        appId: "1:828806707255:web:c115f694979f8b86c4a7b2"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const storage = getStorage(app);
+      
+      // Make Firebase services available globally
+      window.db = db;
+      window.storage = storage;
+      window.storageRef = ref;
+      window.uploadBytes = uploadBytes;
+      window.getDownloadURL = getDownloadURL;
+      
+      // Firestore functions
+      window.firestoreCollection = collection;
+      window.firestoreDoc = doc;
+      window.firestoreSetDoc = setDoc;
+      window.firestoreAddDoc = addDoc;
+      window.firestoreGetDocs = getDocs;
+      window.firestoreGetDoc = getDoc;
+      window.firestoreQuery = query;
+      window.firestoreWhere = where;
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><a href="../index.html">EcoTrade</a></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
+                    <li><a href="../plans.html">Premium Plans</a></li>
+                    <li><a href="../login.html" class="btn-login">Login/Register</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section>
+        <div class="container">
+            <div class="listing-details-container">
+                <div class="listing-gallery">
+                    <div class="main-image">
+                        <img src="../img/placeholder.jpg" alt="Listing Main Image">
+                    </div>
+                    <div class="gallery-thumbnails">
+                        <!-- Thumbnails will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="listing-info-box">
+                    <div class="listing-header">
+                        <h2>Loading...</h2>
+                        <div class="price">₹0</div>
+                    </div>
+                    
+                    <div class="listing-meta">
+                        <span>Category</span>
+                        <span>Location</span>
+                        <span>Date</span>
+                    </div>
+                    
+                    <div class="listing-description">
+                        Loading description...
+                    </div>
+                    
+                    <div class="seller-info">
+                        <div class="seller-avatar">
+                            <img src="../img/default-seller.jpg" alt="Seller">
+                        </div>
+                        <div>
+                            <div class="seller-name">Seller Name</div>
+                            <div class="seller-rating">0 ★ (0 reviews)</div>
+                            <a href="#" class="view-profile">View Profile</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info premium-blur">
+                        <h3>Contact Information</h3>
+                        <div class="premium-content-blur">
+                            <p><strong>Phone:</strong> <span id="seller-phone">+91-XXXXXXXXXX</span></p>
+                            <p><strong>Email:</strong> <span id="seller-email">seller@example.com</span></p>
+                            <p><strong>Pickup Address:</strong> <span id="seller-address">123 Sample Street, Locality, City, State</span></p>
+                        </div>
+                        <div class="premium-upgrade-prompt">
+                            <div class="lock-icon">🔒</div>
+                            <h4>Unlock Contact Info with Premium</h4>
+                            <p>Upgrade to Silver or higher plan to view seller contact details.</p>
+                            <a href="../plans.html" class="btn btn-primary">View Premium Plans</a>
+                        </div>
+                    </div>
+                    
+                    <div class="bid-form">
+                        <h3>Place Your Bid</h3>
+                        <form id="bid-form">
+                            <div class="form-group">
+                                <label for="bid-amount">Bid Amount (₹)</label>
+                                <div class="input-group">
+                                    <input type="number" id="bid-amount" min="0" step="0.01" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="bid-message">Message to Seller (Optional)</label>
+                                <textarea id="bid-message" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Place Bid</button>
+                        </form>
+                    </div>
+                    
+                    <div class="current-bids">
+                        <h3>Current Bids</h3>
+                        <div class="current-bids-list">
+                            <!-- Bids will be populated by JavaScript -->
+                            <p class="loading">Loading bids...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 EcoTrade. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/listings.js"></script>
+</body>
+</html> 

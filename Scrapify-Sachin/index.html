@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrapify - Connect with Scrap Buyers and Sellers</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Firebase SDK -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+      import { getFirestore, collection, doc, setDoc, addDoc, getDocs, getDoc, query, where } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+      import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-storage.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBmXZHkXeJU6t-0JkEeGsPzJ5jigvQQTrI",
+        authDomain: "scrapify-8c5a2.firebaseapp.com",
+        projectId: "scrapify-8c5a2",
+        storageBucket: "scrapify-8c5a2.appspot.com",
+        messagingSenderId: "828806707255",
+        appId: "1:828806707255:web:c115f694979f8b86c4a7b2"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const storage = getStorage(app);
+      
+      // Make Firebase services available globally
+      window.db = db;
+      window.storage = storage;
+      window.storageRef = ref;
+      window.uploadBytes = uploadBytes;
+      window.getDownloadURL = getDownloadURL;
+      
+      // Firestore functions
+      window.firestoreCollection = collection;
+      window.firestoreDoc = doc;
+      window.firestoreSetDoc = setDoc;
+      window.firestoreAddDoc = addDoc;
+      window.firestoreGetDocs = getDocs;
+      window.firestoreGetDoc = getDoc;
+      window.firestoreQuery = query;
+      window.firestoreWhere = where;
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>EcoTrade</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="#listings-section" class="scroll-to">Listings</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="plans.html">Premium Plans</a></li>
+                    <li><a href="login.html" class="btn-login">Login/Register</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h2>Connect with Scrap Buyers and Sellers</h2>
+            <p>The premier marketplace for buying and selling scrap materials in bulk</p>
+            <div class="cta-buttons">
+                <a href="login.html" class="btn btn-secondary">Start Buying</a>
+                <a href="login.html" class="btn btn-primary">Start Selling</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="listings-section" id="listings-section">
+        <div class="container">
+            <h2>Latest Scrap Listings</h2>
+            
+            <div class="listings-filter">
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Search listings...">
+                    <button id="search-btn"><i class="fas fa-search"></i>Search</button>
+                </div>
+                <div class="filter-options">
+                    <select id="category-filter">
+                        <option value="">All Categories</option>
+                        <option value="Metal">Metal</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Plastic">Plastic</option>
+                        <option value="Paper">Paper</option>
+                        <option value="Glass">Glass</option>
+                        <option value="Rubber">Rubber</option>
+                        <option value="Textile">Textile</option>
+                        <option value="Wood">Wood</option>
+                        <option value="Construction">Construction</option>
+                        <option value="Automotive">Automotive</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <select id="location-filter">
+                        <option value="">All Locations</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Gujarat">Gujarat</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Delhi">Delhi</option>
+                    </select>
+                    <select id="price-filter">
+                        <option value="">All Prices</option>
+                        <option value="0-500">₹0 - ₹500</option>
+                        <option value="500-1000">₹500 - ₹1000</option>
+                        <option value="1000-2000">₹1000 - ₹2000</option>
+                        <option value="2000+">₹2000+</option>
+                    </select>
+                    <button id="reset-filters">Reset Filters</button>
+                </div>
+            </div>
+            
+            <div class="add-listing-btn-container" id="add-listing-container" style="display:none; text-align: right; margin-bottom: 20px;">
+                <a href="listings/add-listing.html" class="btn btn-primary">+ List Your Scrap</a>
+            </div>
+            <div class="listings-grid" id="listings-container">
+                <!-- Listings will be loaded dynamically from listings.js -->
+                <div class="loading">Loading listings...</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="container">
+            <h2>How EcoTrade Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">1</div>
+                    <h3>List Your Scrap</h3>
+                    <p>Sellers can easily upload their scrap materials with photos and descriptions.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">2</div>
+                    <h3>Receive Bids</h3>
+                    <p>Interested buyers place bids on your listings.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">3</div>
+                    <h3>Accept & Complete</h3>
+                    <p>Accept the best offer and arrange for pickup or delivery.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2>Seller & Buyer Testimonials</h2>
+            <div class="testimonial-carousel">
+                <div class="testimonial-item active">
+                    <div class="testimonial-content">
+                        <p>"I sold 500 kg of copper in just 2 days! The platform is incredibly easy to use and connects me directly with serious buyers."</p>
+                        <div class="testimonial-author">
+                            <strong>Rajesh Sharma</strong>, Seller
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-item">
+                    <div class="testimonial-content">
+                        <p>"Found the best rates with zero hassle! As a first-time scrap buyer, I was impressed by how streamlined the entire process was."</p>
+                        <div class="testimonial-author">
+                            <strong>Priya Patel</strong>, Buyer
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-item">
+                    <div class="testimonial-content">
+                        <p>"EcoTrade helped me expand my recycling business. The verification system ensures I only deal with reliable sellers."</p>
+                        <div class="testimonial-author">
+                            <strong>Vikram Singh</strong>, Buyer
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-navigation">
+                    <button class="prev-btn">❮</button>
+                    <div class="dots">
+                        <span class="dot active" data-index="0"></span>
+                        <span class="dot" data-index="1"></span>
+                        <span class="dot" data-index="2"></span>
+                    </div>
+                    <button class="next-btn">❯</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-overlay"></div>
+        <div class="container">
+            <div class="cta-content">
+                <div class="cta-left">
+                    <p>Whether you're a seller or buyer, EcoTrade is for you.</p>
+                </div>
+                <div class="cta-right">
+                    <div class="cta-card">
+                        <div class="cta-card-header">
+                            <h2>Get Started Today</h2>
+                            <p>India's fastest growing scrap marketplace</p>
+                        </div>
+                        <div class="cta-buttons">
+                            <a href="login.html" class="btn btn-primary btn-sm">Sign Up Now</a>
+                            <a href="#" class="btn btn-secondary btn-sm" id="start-listing-btn">Start Listing</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 EcoTrade. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/listings.js"></script>
+</body>
+</html> 

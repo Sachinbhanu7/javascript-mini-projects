@@ -1,0 +1,181 @@
+{
+  "users": [
+    {
+      "id": "seller1",
+      "name": "John Smith",
+      "email": "john@example.com",
+      "password": "password",
+      "role": "seller",
+      "profileImage": "img/default-seller.jpg",
+      "createdAt": "2023-05-01T09:30:00.000Z",
+      "listings": ["1", "3"],
+      "reviews": [
+        {
+          "id": "review1",
+          "buyerId": "buyer1",
+          "rating": 4.5,
+          "comment": "Great seller, fast response!",
+          "createdAt": "2023-05-20T14:30:00.000Z"
+        },
+        {
+          "id": "review2",
+          "buyerId": "buyer2",
+          "rating": 5,
+          "comment": "Excellent quality scrap material, exactly as described.",
+          "createdAt": "2023-05-25T09:15:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "seller2",
+      "name": "Jane Doe",
+      "email": "jane@example.com",
+      "password": "password",
+      "role": "seller",
+      "profileImage": "img/default-seller.jpg",
+      "createdAt": "2023-04-15T11:45:00.000Z",
+      "listings": ["2"],
+      "reviews": [
+        {
+          "id": "review3",
+          "buyerId": "buyer1",
+          "rating": 4,
+          "comment": "Good seller, would do business again.",
+          "createdAt": "2023-05-18T11:45:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "seller3",
+      "name": "Mike Johnson",
+      "email": "mike@example.com",
+      "password": "password",
+      "role": "seller",
+      "profileImage": "img/default-seller.jpg",
+      "createdAt": "2023-03-30T08:20:00.000Z",
+      "listings": ["4"],
+      "reviews": []
+    },
+    {
+      "id": "buyer1",
+      "name": "Sarah Williams",
+      "email": "sarah@example.com",
+      "password": "password",
+      "role": "buyer",
+      "profileImage": "img/default-buyer.jpg",
+      "createdAt": "2023-05-10T13:15:00.000Z",
+      "bids": ["bid1", "bid2"],
+      "reviews": []
+    },
+    {
+      "id": "buyer2",
+      "name": "Robert Brown",
+      "email": "robert@example.com",
+      "password": "password",
+      "role": "buyer",
+      "profileImage": "img/default-buyer.jpg",
+      "createdAt": "2023-03-25T16:20:00.000Z",
+      "bids": ["bid3"],
+      "reviews": []
+    }
+  ],
+  "listings": [
+    {
+      "id": "1",
+      "sellerId": "seller1",
+      "title": "Scrap Metal - Mixed Aluminum",
+      "category": "Metal",
+      "description": "Approximately 500kg of mixed aluminum scrap. Mostly composed of old window frames, gutters, and some machinery parts. All clean and sorted.",
+      "startingPrice": 750,
+      "quantity": 500,
+      "location": "Chicago, IL",
+      "images": [
+        "https://tse4.mm.bing.net/th?id=OIP.WMNV_i-v83dT3YybJV_AxwHaEo&pid=Api",
+        "https://tse3.mm.bing.net/th?id=OIP.NY9b4LZikT_88JxiGpHiLwHaEK&pid=Api",
+        "https://tse3.mm.bing.net/th?id=OIP.7gYdUOJ0qjBOoU1UE94GPQHaE6&pid=Api"
+      ],
+      "status": "active",
+      "createdAt": "2023-05-27T10:30:00.000Z"
+    },
+    {
+      "id": "2",
+      "sellerId": "seller2",
+      "title": "Copper Wiring - Industrial Grade",
+      "category": "Metal",
+      "description": "High-quality copper wiring from decommissioned factory. Clean, no insulation. Approximately 200kg total weight.",
+      "startingPrice": 1200,
+      "quantity": 200,
+      "location": "Detroit, MI",
+      "images": [
+        "https://tse1.mm.bing.net/th?id=OIP.Vql4N5uT2e0MlURtjbeT7AHaFj&pid=Api",
+        "https://tse2.mm.bing.net/th?id=OIP.yztvMfQWgU4PVGpMu3JxZQHaEo&pid=Api",
+        "https://tse4.mm.bing.net/th?id=OIP.iTboAE0lIYbnGkpMoTNMSgHaFj&pid=Api"
+      ],
+      "status": "active",
+      "createdAt": "2023-05-25T14:15:00.000Z"
+    },
+    {
+      "id": "3",
+      "sellerId": "seller1",
+      "title": "Scrap Electronics - Computer Parts",
+      "category": "Electronics",
+      "description": "Mixed lot of computer parts including motherboards, CPUs, RAM, and other components. Perfect for gold and precious metal recovery.",
+      "startingPrice": 500,
+      "quantity": 150,
+      "location": "San Francisco, CA",
+      "images": [
+        "https://tse4.mm.bing.net/th/id/OIP.uhQ6o9UHecHhKujGg56yMQHaFc?pid=Api",
+        "https://tse1.mm.bing.net/th?id=OIP.3oM_lZtwHMokAzx_Aguo9wHaEK&pid=Api",
+        "https://tse4.mm.bing.net/th?id=OIP.d6pWak8WZxUZ4XRE4gNd1AHaD4&pid=Api"
+      ],
+      "status": "active",
+      "createdAt": "2023-05-29T08:45:00.000Z"
+    },
+    {
+      "id": "4",
+      "sellerId": "seller3",
+      "title": "Steel Beams - Construction Surplus",
+      "category": "Metal",
+      "description": "Unused steel beams from abandoned construction project. All in excellent condition, minimal rust. Approximately 1000kg total.",
+      "startingPrice": 850,
+      "quantity": 1000,
+      "location": "Austin, TX",
+      "images": [
+        "https://tse1.mm.bing.net/th?id=OIP.gPhsCS9wRYhGXIrGEIQFwwHaFj&pid=Api",
+        "https://tse4.mm.bing.net/th?id=OIP.WVN6y2rMysQ1k2Ba_A2O8QHaFj&pid=Api",
+        "https://tse4.mm.bing.net/th?id=OIP.HbF8QcdTcsIkhyi1Zr2UnwHaE7&pid=Api"
+      ],
+      "status": "active",
+      "createdAt": "2023-05-28T12:10:00.000Z"
+    }
+  ],
+  "bids": [
+    {
+      "id": "bid1",
+      "listingId": "1",
+      "buyerId": "buyer1",
+      "amount": 800,
+      "message": "I can pick it up immediately if accepted.",
+      "status": "pending",
+      "createdAt": "2023-05-28T14:30:00.000Z"
+    },
+    {
+      "id": "bid2",
+      "listingId": "2",
+      "buyerId": "buyer1",
+      "amount": 1300,
+      "message": "Interested in the full lot. Can arrange transport.",
+      "status": "pending",
+      "createdAt": "2023-05-29T09:15:00.000Z"
+    },
+    {
+      "id": "bid3",
+      "listingId": "1",
+      "buyerId": "buyer2",
+      "amount": 780,
+      "message": "Available for pickup next week.",
+      "status": "pending",
+      "createdAt": "2023-05-28T16:45:00.000Z"
+    }
+  ]
+} 
