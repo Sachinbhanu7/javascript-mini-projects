@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Scrapify</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><a href="index.html">Scrapify</a></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                    <li><a href="plans.html">Premium Plans</a></li>
+                    <li><a href="login.html" class="btn-login">Login/Register</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="contact-hero">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <p>Get in touch with the Scrapify team</p>
+        </div>
+    </section>
+
+    <section class="contact-content">
+        <div class="container">
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <h3>Email Us</h3>
+                            <p>support@scrapify.com</p>
+                            <p>For general inquiries and support</p>
+                        </div>
+                        <div class="contact-method">
+                            <h3>Call Us</h3>
+                            <p>(123) 456-7890</p>
+                            <p>Monday to Friday, 9am - 5pm EST</p>
+                        </div>
+                        <div class="contact-method">
+                            <h3>Visit Us</h3>
+                            <p>123 Recycling Way, Suite 100</p>
+                            <p>Green City, EC 12345</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-social">
+                        <h3>Follow Us</h3>
+                        <div class="social-links">
+                            <a href="#" class="social-link">Facebook</a>
+                            <a href="#" class="social-link">Twitter</a>
+                            <a href="#" class="social-link">Instagram</a>
+                            <a href="#" class="social-link">LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container">
+                    <h3>Send Us a Message</h3>
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="contact-name">Your Name</label>
+                            <input type="text" id="contact-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email">Email Address</label>
+                            <input type="email" id="contact-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-subject">Subject</label>
+                            <select id="contact-subject" required>
+                                <option value="">Select a subject</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="support">Technical Support</option>
+                                <option value="business">Business Partnership</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message">Message</label>
+                            <textarea id="contact-message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <h3>How do I create an account?</h3>
+                    <p>You can create an account by clicking the "Login/Register" button in the top menu and following the registration process. You'll need to provide your email, create a password, and select whether you want to register as a buyer or seller.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>How does the bidding process work?</h3>
+                    <p>Buyers can place bids on listings they're interested in. Sellers receive notifications of bids and can accept or reject them. Once a bid is accepted, both parties can coordinate the pickup or delivery of the materials.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Is there a fee to use Scrapify?</h3>
+                    <p>No, Scrapify is currently free to use for both buyers and sellers. We do not charge any listing or transaction fees at this time.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>How can I ensure safe transactions?</h3>
+                    <p>We recommend checking user reviews and ratings before engaging in transactions. Always meet in safe, public locations for exchanges and inspect materials before completing a purchase.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Scrapify. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const contactForm = document.getElementById('contact-form');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    
+                    // In a real app, this would send the form data to a server
+                    // For demo purposes, just show a success message
+                    alert('Thank you for your message! We will get back to you soon.');
+                    contactForm.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html> 

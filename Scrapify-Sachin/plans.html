@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Plans - Scrapify</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .plans-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 30px 0;
+            justify-content: center;
+        }
+        
+        .plan-category {
+            width: 100%;
+            margin-bottom: 50px;
+        }
+        
+        .plan-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            padding: 30px;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .plan-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .plan-card.featured {
+            border: 2px solid #1e88e5;
+        }
+        
+        .plan-card.featured::before {
+            content: "POPULAR";
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background: #1e88e5;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+        }
+        
+        .plan-header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .plan-icon {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+        
+        .plan-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .plan-price {
+            font-size: 36px;
+            font-weight: bold;
+            color: #1e88e5;
+            margin-bottom: 10px;
+        }
+        
+        .plan-price span {
+            font-size: 16px;
+            color: #888;
+        }
+        
+        .plan-features {
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+        
+        .plan-features ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .plan-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f5f5f5;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .plan-features li::before {
+            content: "✓";
+            color: #4caf50;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        .plan-features li.unavailable::before {
+            content: "✕";
+            color: #f44336;
+        }
+        
+        .plan-button {
+            text-align: center;
+        }
+        
+        .plan-button .btn {
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .section-intro {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-intro p {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><a href="index.html">Scrapify</a></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#listings-section" class="scroll-to">Listings</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="plans.html" class="active">Premium Plans</a></li>
+                    <li><a href="login.html" class="btn-login">Login/Register</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h2>Premium Plans</h2>
+            <p>Unlock more features and maximize your experience on Scrapify</p>
+        </div>
+    </section>
+
+    <section class="plans-section">
+        <div class="container">
+            <div class="plan-category">
+                <div class="section-intro">
+                    <h2>Buyer Plans</h2>
+                    <p>Access seller contact information, premium listings, and exclusive features to enhance your buying experience.</p>
+                </div>
+                
+                <div class="plans-container">
+                    <div class="plan-card">
+                        <div class="plan-header">
+                            <div class="plan-icon">🥈</div>
+                            <h3 class="plan-title">Silver Plan</h3>
+                            <div class="plan-price">₹99 <span>/month</span></div>
+                        </div>
+                        <div class="plan-features">
+                            <ul>
+                                <li>Browse all public listings</li>
+                                <li>Place bids on items</li>
+                                <li>Access seller contact details</li>
+                                <li class="unavailable">Access to Premium listings</li>
+                                <li class="unavailable">No brokerage assistance</li>
+                                <li class="unavailable">Direct chat with sellers</li>
+                            </ul>
+                        </div>
+                        <div class="plan-button">
+                            <a href="#" class="btn btn-primary">Subscribe</a>
+                        </div>
+                    </div>
+                    
+                    <div class="plan-card featured">
+                        <div class="plan-header">
+                            <div class="plan-icon">🥇</div>
+                            <h3 class="plan-title">Gold Plan</h3>
+                            <div class="plan-price">₹199 <span>/month</span></div>
+                        </div>
+                        <div class="plan-features">
+                            <ul>
+                                <li>Browse all public listings</li>
+                                <li>Place bids on items</li>
+                                <li>Access seller contact details</li>
+                                <li>Access to Premium listings</li>
+                                <li class="unavailable">No brokerage assistance</li>
+                                <li class="unavailable">Direct chat with sellers</li>
+                            </ul>
+                        </div>
+                        <div class="plan-button">
+                            <a href="#" class="btn btn-primary">Subscribe</a>
+                        </div>
+                    </div>
+                    
+                    <div class="plan-card">
+                        <div class="plan-header">
+                            <div class="plan-icon">💎</div>
+                            <h3 class="plan-title">Platinum Plan</h3>
+                            <div class="plan-price">₹399 <span>/month</span></div>
+                        </div>
+                        <div class="plan-features">
+                            <ul>
+                                <li>Browse all public listings</li>
+                                <li>Place bids on items</li>
+                                <li>Access seller contact details</li>
+                                <li>Access to Premium listings</li>
+                                <li>No brokerage assistance</li>
+                                <li>Direct chat with sellers</li>
+                            </ul>
+                        </div>
+                        <div class="plan-button">
+                            <a href="#" class="btn btn-primary">Subscribe</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="plan-category">
+                <div class="section-intro">
+                    <h2>Seller Plans</h2>
+                    <p>List more items, get priority placement, and connect with premium buyers to sell your scrap materials faster.</p>
+                </div>
+                
+                <div class="plans-container">
+                    <div class="plan-card">
+                        <div class="plan-header">
+                            <div class="plan-icon">🙂</div>
+                            <h3 class="plan-title">Free Seller</h3>
+                            <div class="plan-price">₹0 <span>/month</span></div>
+                        </div>
+                        <div class="plan-features">
+                            <ul>
+                                <li>List up to 3 active items</li>
+                                <li>Basic listing visibility</li>
+                                <li class="unavailable">Highlighted listings</li>
+                                <li class="unavailable">Priority in search results</li>
+                                <li class="unavailable">Featured seller badge</li>
+                                <li class="unavailable">Appear in Premium Listings</li>
+                                <li class="unavailable">Direct leads from Platinum buyers</li>
+                            </ul>
+                        </div>
+                        <div class="plan-button">
+                            <a href="#" class="btn btn-secondary">Current Plan</a>
+                        </div>
+                    </div>
+                    
+                    <div class="plan-card featured">
+                        <div class="plan-header">
+                            <div class="plan-icon">⭐</div>
+                            <h3 class="plan-title">Pro Seller</h3>
+                            <div class="plan-price">₹199 <span>/month</span></div>
+                        </div>
+                        <div class="plan-features">
+                            <ul>
+                                <li>List up to 20 active items</li>
+                                <li>Improved listing visibility</li>
+                                <li>Highlighted listings</li>
+                                <li>Priority in search results</li>
+                                <li class="unavailable">Featured seller badge</li>
+                                <li class="unavailable">Appear in Premium Listings</li>
+                                <li class="unavailable">Direct leads from Platinum buyers</li>
+                            </ul>
+                        </div>
+                        <div class="plan-button">
+                            <a href="#" class="btn btn-primary">Subscribe</a>
+                        </div>
+                    </div>
+                    
+                    <div class="plan-card">
+                        <div class="plan-header">
+                            <div class="plan-icon">🌟</div>
+                            <h3 class="plan-title">Elite Seller</h3>
+                            <div class="plan-price">₹399 <span>/month</span></div>
+                        </div>
+                        <div class="plan-features">
+                            <ul>
+                                <li>Unlimited active listings</li>
+                                <li>Maximum listing visibility</li>
+                                <li>Highlighted listings</li>
+                                <li>Priority in search results</li>
+                                <li>Featured seller badge</li>
+                                <li>Appear in Premium Listings</li>
+                                <li>Direct leads from Platinum buyers</li>
+                            </ul>
+                        </div>
+                        <div class="plan-button">
+                            <a href="#" class="btn btn-primary">Subscribe</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cta-section" style="text-align: center; margin: 50px 0;">
+                <h2>Ready to Upgrade Your Experience?</h2>
+                <p>Choose the plan that fits your needs and take your Scrapify experience to the next level.</p>
+                <a href="login.html" class="btn btn-primary">Sign Up Now</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Scrapify. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 
